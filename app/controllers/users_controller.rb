@@ -1,5 +1,6 @@
+# Users Controller
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create, :show]
+  skip_before_action :require_login, only: %i[new create show]
 
   def new
     @user = User.new
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      flash[:success] = "User updated"
+      flash[:success] = 'User updated'
       redirect_to current_user
     else
       render :edit
@@ -34,6 +35,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :first_name, :last_name, :password, :password_confirmation)
+    params.require(:user).permit(:username,
+                                 :email,
+                                 :first_name,
+                                 :last_name,
+                                 :password,
+                                 :password_confirmation)
   end
 end

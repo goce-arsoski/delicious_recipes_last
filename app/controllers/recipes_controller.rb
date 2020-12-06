@@ -1,7 +1,8 @@
+# Recipes Controller
 class RecipesController < ApplicationController
-  skip_before_action :require_login, only: [:index]
-  before_action :find_recipe, only: [:show, :edit, :edit_instructions, :edit_ingredients, :update, :destroy]
-  before_action :set_user, only: [:edit, :edit_instructions, :edit_ingredients, :update, :destroy]
+  skip_before_action :require_login, only: :index
+  before_action :find_recipe, only: %i[show edit dit_instructions edit_ingredients update destroy]
+  before_action :set_user, only: %i[edit edit_instructions edit_ingredients update destroy]
 
   def index
     @recipes = Recipe.all.order('created_at DESC')
@@ -12,8 +13,7 @@ class RecipesController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @recipe = Recipe.new
@@ -46,7 +46,7 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
-      flash[:success] = "Recipe updated"
+      flash[:success] = 'Recipe updated'
       redirect_to @recipe
     else
       render :edit
@@ -62,8 +62,8 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :description,
-                                   instructions_attributes: [:id, :step, :_destroy],
-                                   ingredients_attributes: [:id, :name, :_destroy])
+                                   instructions_attributes: %i[id step _destroy],
+                                   ingredients_attributes: %i[id name _destroy])
   end
 
   def find_recipe
