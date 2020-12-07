@@ -1,7 +1,7 @@
 # Recipes Controller
 class RecipesController < ApplicationController
   skip_before_action :require_login, only: :index
-  before_action :find_recipe, only: %i[show edit dit_instructions edit_ingredients update destroy]
+  before_action :find_recipe, only: %i[show edit edit_instructions edit_ingredients update destroy]
   before_action :set_user, only: %i[edit edit_instructions edit_ingredients update destroy]
 
   def index
