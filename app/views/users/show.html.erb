@@ -40,7 +40,7 @@
         </div>
       <% else %>
         <div class="title">
-                  <% if equal_with_current_user?(@user) %>
+          <% if equal_with_current_user?(@user) %>
             You don't have <i>Recipes</i> yet.
           <% else %>
             <%= "#{@user.first_name} " %>don't have <i>Recipes</i>.

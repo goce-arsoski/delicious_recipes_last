@@ -11,7 +11,6 @@ class RecipesController < ApplicationController
   # Method for custom route
   def user_recipes
     @recipes = Recipe.all
-    @user = User.find(params[:id])
   end
 
   def show; end
