@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all.order('created_at DESC')
   end
 
+  # Method for custom route
   def user_recipes
     @recipes = Recipe.all
     @user = User.find(params[:id])
@@ -36,9 +37,12 @@ class RecipesController < ApplicationController
     @recipe.ingredients.build
   end
 
+  # Method for nested form
   def edit_instructions
     3.times { @recipe.instructions.build }
   end
+
+  # Method for nested form
 
   def edit_ingredients
     3.times { @recipe.ingredients.build }
